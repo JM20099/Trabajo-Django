@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+            <!---Titulo de cada pgina-->
+        {% endblock %}
+        ADSO SENA</title>
+</head>
+
+<body>
+
+    <h1>Sitio WEB con Django | ADSO SENA</h1>
+    <hr />
+    <ul>
+        <li>
+            <a href="/inicio">inicio</a>
+        </li>
+        <li>
+            <a href="/hola-mundo">Hola Mundo</a>
+        </li>
+        <li>
+            <a href="/pagina-pruebas">Pagina de pruebas</a>
+        </li>
+        <li>
+            <a href="/contacto">Contacto</a>
+        </li>
+    </ul>
+    <hr />
+
+    <div id="content">
+        {% block content %}  <!--El block content sirve para traer codigo de otro archivo y que este se utilize en este div-->
+            <!--Codigo que viene de templates-->
+        {% endblock %}
+    </div>
+
+    <footer>
+        Curso de Python &copy; ADSO SENA 2024
+    </footer>
+</body>
+
+</html>

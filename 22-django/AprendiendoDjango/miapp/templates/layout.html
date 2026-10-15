@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
         {% block title %}
-            <!---Titulo de cada pgina-->
+         
         {% endblock %}
         ADSO SENA</title>
 </head>
@@ -32,10 +32,12 @@
     <hr />
 
     <div id="content">
-        {% block content %}  <!--El block content sirve para traer codigo de otro archivo y que este se utilize en este div-->
+        {% block content %}  <!--El block content sirve para traer codigo de otro archivo y que este se utilize en este div, se trae colocandole el mismo nombre de block en el codigo del otro archivo que se a va a utilizar-->
             <!--Codigo que viene de templates-->
         {% endblock %}
     </div>
+
+    <hr>
 
     <footer>
         Curso de Python &copy; ADSO SENA 2024

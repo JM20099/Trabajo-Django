@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,39 +9,55 @@
         {% block title %}
          
         {% endblock %}
-        ADSO SENA</title>
+        ADSO SENA
+    </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"/>   <!--Unir archivo con el css-->
 </head>
 
 <body>
+    
+    <!--Cabecera de la pagina-->
+    <header>
+        <div id="logotipo">
+            <!--Logo django-->
+            <img src="{% static 'images/logo.png' %}"/>
+            <h1>Sitio Web con Django</h1>
+        </div>    
+    </header>
 
-    <h1>Sitio WEB con Django | ADSO SENA</h1>
-    <hr />
-    <ul>
-        <li>
-            <a href="/inicio">inicio</a>
-        </li>
-        <li>
-            <a href="/hola-mundo">Hola Mundo</a>
-        </li>
-        <li>
-            <a href="/pagina-pruebas">Pagina de pruebas</a>
-        </li>
-        <li>
-            <a href="/contacto">Contacto</a>
-        </li>
-    </ul>
-    <hr />
+    <nav>
+        <ul>
+            <li>
+                <a href="{% url 'inicio' %}">inicio</a>
+            </li>
+            <li>
+                <a href="{% url 'holamundo' %}">Hola Mundo</a>
+            </li>
+            <li>
+                <a href="{% url 'pagina' %}">Pagina de pruebas</a>
+            </li>
+            <li>
+                <a href="{% url 'contacto' %}">Contacto</a>
+            </li>
+        </ul>
+    </nav>
+    
 
     <div id="content">
-        {% block content %}  <!--El block content sirve para traer codigo de otro archivo y que este se utilize en este div, se trae colocandole el mismo nombre de block en el codigo del otro archivo que se a va a utilizar-->
+        <div class="box">
+            <h2 class="title">Titulo de prueba</h2>
+            {% block content %}
+            <!--El block content sirve para traer codigo de otro archivo y que este se utilize en este div, se trae colocandole el mismo nombre de block en el codigo del otro archivo que se a va a utilizar-->
             <!--Codigo que viene de templates-->
-        {% endblock %}
+            <strong>Contenido original del bloque original</strong>
+            {% endblock %}
+        </div>
     </div>
 
-    <hr>
+
 
     <footer>
-        Curso de Python &copy; ADSO SENA 2024
+        Curso de Python &copy; ADSO SENA 2026 - {% now "d/m/Y" %}
     </footer>
 </body>
 

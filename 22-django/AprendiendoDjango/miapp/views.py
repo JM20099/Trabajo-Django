@@ -21,7 +21,16 @@ def index(request):
         year += 1
 
     html += "<ul>"
-    return render(request, 'index.html')
+
+    nombre = 'Carlos Gomez'
+    lenguajes = ['Python', 'JavaScript', 'Java', 'C#']
+
+    return render(request, 'index.html', {
+        'title': "Inicio",
+        'mi_variable': "Soy un dato que esta en la vista",
+        'nombre': nombre,
+        'lenguajes': lenguajes,
+    })
 
 def hola_mundo(request):
     return render(request, 'hola_Mundo.html')

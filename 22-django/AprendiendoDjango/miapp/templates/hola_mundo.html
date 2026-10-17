@@ -2,6 +2,8 @@
  
  {% block title %} Pagina de pruebas {% endblock %}
  {% block content %}
- <h1>Hola mundo con Django!!!</h1>
+{{ block.super }}  <!--Traer contenido de archivo padre osea layout-->
+
+ <h1 class="title">Hola mundo con Django!!!</h1>
  <h1>Soy aprendiz ADSO</h3>
  {% endblock %}

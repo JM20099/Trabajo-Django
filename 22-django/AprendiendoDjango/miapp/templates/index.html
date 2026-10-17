@@ -1,7 +1,31 @@
 {% extends 'layout.html' %}
 
-{% block title %} Inicio {% endblock %}
+{% block title %} {{ title}} {% endblock %}
 {% block content %}
-<h1>Inicio</h1>
+
+{% include "fecha_actual.html" %}
+
+{% comment "Esto es un comentario en django" %}
+{% endcomment %}
+
+<h1 class="title">{{ title }}</h1>
+<p>{{ mi_variable }}</p>
+
+{% if nombre and nombre == 'Carlos Gomez' %}
+    <p>{{ nombre }}</p>
+{% else %}
+    <strong>El nombre no existe o no coincide</strong>
+{% endif %}
+
+<h3>Listado de lenguajes de programacion</h3>
+<ul>
+    {% for lenguaje in lenguajes %}
+        <li>{{forloop.counter}} {{ lenguaje }} </li>     <!--forloop.first le pone true al primer elemento de la lista y con forloop.last le pone true al último elemento y forloop.counter enumera cada elemento de la lista-->
+    {% empty %}     <!--funciona igual que el else pero para listas-->
+        <p>No hay lenguajes para mostrar</p>
+    {% endfor %}
+
+</ul>
+
 <p>Años hasta el 2050:</p>
 {% endblock %}

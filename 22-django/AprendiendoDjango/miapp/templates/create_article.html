@@ -11,7 +11,9 @@
 <div class="box">
 <h1 class="title">Formularios en Django</h1>
 
-<form action="/save-article/" method="GET">
+<!--<form action="/save-article/" method="GET"-->
+<form action="{% url 'save' %}" method="POST">
+    {% csrf_token %}
     <!--Campo titulo-->
     <label for="title">Titulo</label>
     <input type="text" name="title" />

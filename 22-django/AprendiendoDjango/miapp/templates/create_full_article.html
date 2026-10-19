@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %} Formularios en Django {% endblock %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"/>
+
+<h1 class="title">Formularios en Django</h1>
+
+{% if form.errors %}
+    <strong class="rojo">
+        Hay errores en el formulario
+    </strong>
+{% endif %}
+
+<form action="" method="POST">
+    {% csrf_token %}    <!--La etiqueta {% csrf_token %} es una medida de seguridad fundamental en Django que sirve para proteger tu aplicación contra ataques de Falsificación de Petición en Sitios Cruzados osea cuando el usuario entra a la pagina se le genera un codigo secreto y cuando se envia el formulario se valida si el codigo es el mismo).-->
+
+    <!--aqui mostramos el Formulario mandando a llamar la variable form que se creo en la vista-->
+    {{ form }}
+
+
+    
+    <!--Botón-->
+    <input type="submit" value="Guardar" />
+</form>
+
+{% endblock %}

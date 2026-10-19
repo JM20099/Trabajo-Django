@@ -181,3 +181,10 @@ footer{
     cursor: pointer;
     background: #1f7e58;
 }
+
+
+/* estilos para clase rojo de validadcion */
+.rojo{
+    color: red;
+    box-shadow: 0px 0px 4px black;
+}

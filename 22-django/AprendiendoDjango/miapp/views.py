@@ -1,5 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from miapp.models import Article, Category
+from miapp.forms import FormArticle #Importamos el formulario desde forms.py
+from django.contrib import messages  # libreria mensajes flash
 
 # Create your views here.
 # MVC = Modelo    Vista    Controlador  -> ACcciones (metodos)
@@ -84,6 +86,7 @@ def editar_articulo(request, id):
 
     return HttpResponse(f"Articulo {articulo.id} actualizado: {articulo.title} - {articulo.content}")
 
+"""
 def articulos(request):
 
     articulos = Article.objects.all()  # Obtener todos los articulos
@@ -99,6 +102,38 @@ def articulos(request):
                   {
         'articulos': articulos
     })
+"""
+
+# Mostrar articulos
+def articulos(request):  # creacion de la vista articulos
+    # Creamos un template para listar varios articulos
+    # 1. hacemos la peticion a la base de datos
+    # Creamos la variable articulos y Llamamos al modelo Article, usamos objects para poder hacer una consulta
+    articulos = Article.objects.all().order_by("-id")  # En este caso no usamos el metodo get si no el metodo all() para sacar toda la información
+    # dentro de articulos tenemos una lista de objetos un array de objetos
+    
+    """
+    #Consultas con condiciones filter para filtrar por un valor especifico
+    articulos = Article.objects.filter(title__contains = "Tiburón")
+
+    #Realizar una consulta que muestre solo los esten publicados y excluya bajo una condición
+    articulos = Article.objects.filter(title = "Tiburón",).exclude(public=True)
+
+    #Consulta ejecutando SQL
+    articulos = Article.objects.raw("SELECT * FROM miapp_article WHERE title='Tiburón' AND public=1")
+
+    #Consulta utilizando el OR con ORM
+    articulos = Article.objects.filter(
+        Q(title__contains="John") | Q(title_contains="Señor")
+    )
+    """
+    return render(
+        request,
+        "articulos.html",
+        {  # pasamos el request y la template articulos.html y como tercer parametro
+            "articulos": articulos
+        },
+    )  # pasamos un diccionario con las variables que deseamos mostrar
 
 def borrar_articulo(request, id):
     articulo = Article.objects.get(pk=id)  # Obtener el articulo con id
@@ -111,8 +146,6 @@ def borrar_articulo(request, id):
 def save_article(request):     # No pasamos parametros por url y lo vamos a pasar por formulario
     if request.method == 'POST':
         title = request.POST['title']
-        if len(title) < 5:
-            return HttpResponse(f"El titulo es muy pequeño")
         content = request.POST['content']
         public = request.POST['public']
         articulo = Article(
@@ -128,3 +161,42 @@ def save_article(request):     # No pasamos parametros por url y lo vamos a pasa
 
 def create_article(request):
     return render(request, 'create_article.html')
+
+def create_full_article(request):
+    if request.method == 'POST':
+        formulario = FormArticle(request.POST)
+        
+        if formulario.is_valid():
+            data_form = formulario.cleaned_data    # es un diccionario de Python que contiene todos los datos de los campos de tu formulario que ya han pasado por los filtros de validación y limpieza de Django.
+            title = data_form.get('title')
+            content = data_form['content']
+            public = data_form['public']
+        
+            articulo = Article(
+                title=title,  # title(nombre del modelo) = title(nombre de la variable)
+                content=content,
+                public=public,
+)
+            # Para guardar este articulo en la BD
+            articulo.save()
+
+            # Crear mensaje flash(sesión que solo se muestra 1 vez)
+            messages.success(request, f"Ha creado correctamente el articulo {articulo.id}")     # success es para mostrar un mensaje de éxito
+
+            # rediccionar la pagina a ariculos despues de guardado
+            return redirect("articulos")
+            # return HttpResponse(articulo.title + ' -- ' + articulo.content + ' -- ' + str(articulo.public))
+        
+        # NUEVO: Si el formulario NO es válido, volvemos a renderizar la plantilla 
+        # pasándole el formulario con los errores para que el usuario los vea.
+        else:
+            return render(request, 'create_full_article.html', {
+                'form': formulario
+            })
+
+    else:
+        # Si es una petición GET, mostramos el formulario vacío
+        formulario = FormArticle()
+        return render(request, 'create_full_article.html', {
+            'form': formulario
+        })

@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'miapp',
+    'miapp.apps.MiappConfig',  # se agrega la aplicación miapp
 ]
 
 MIDDLEWARE = [
@@ -116,6 +116,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+import os
+
+# Media files
+MEDIA_URL = "/media/"  # Carpeta donde se visualizaran las imagenes en la web
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")  # Ruta física en el disco duro, base dir es la ruta del proyecto y media es la carpeta donde se guardaran las imagenes
 
 
 # Email

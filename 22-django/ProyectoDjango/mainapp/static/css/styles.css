@@ -249,3 +249,16 @@ footer{
     width: 80px;
     text-align: center;
 }
+
+/*Estilos de fecha*/
+.date{
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: gray;
+}
+
+.content{
+    line-height: 25px;
+    
+}

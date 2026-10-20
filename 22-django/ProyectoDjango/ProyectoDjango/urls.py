@@ -18,9 +18,12 @@ from django.contrib import admin
 from django.urls import path
 from mainapp import views
 
+import pages.views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="index"), # configuracion de ruta vacia vinculada al index
     path('inicio/', views.index, name="inicio"), # cuando encuentre la ruta inicio
-    path('nosotros/', views.about, name="about"), # cuando encuentre la ruta about
+    #path('nosotros/', views.about, name="about"), # cuando encuentre la ruta about
+    path('pagina/<str:slug>', pages.views.page, name="page"),
 ]

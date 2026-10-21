@@ -23,7 +23,7 @@ class Article(models.Model):
     image = models.ImageField(default="null", verbose_name="Imagen", upload_to="articles")  #upload_to indica la carpeta donde se guardara la imagen
     public = models.BooleanField(verbose_name="¿Publicado?")
     user = models.ForeignKey(User, editable=False, verbose_name="Usuario", on_delete=models.CASCADE)    #Cascade significa que si se borra el usuario se borran sus articulos
-    categories = models.ManyToManyField(Category, verbose_name="Categorías", blank=True)  #Relacion muchos a muchos, un articulo puede tener muchas categorias y una categoria puede tener muchos articulos                                
+    categories = models.ManyToManyField(Category, verbose_name="Categorías", blank=True, related_name="articles")  #Relacion muchos a muchos, un articulo puede tener muchas categorias y una categoria puede tener muchos articulos                                
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Creación:")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Creado el")
 

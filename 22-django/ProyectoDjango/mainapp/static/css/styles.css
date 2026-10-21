@@ -105,10 +105,12 @@ nav > ul > li:hover > ul > li{
     padding: 8px;
     line-height: 25px;
     font-size: 13px;
+    transition: all 300 ms;
 }
 
 nav > ul > li:hover > ul > li a{
     color: #666;
+    transition: all 300 ms;
 }
 
 nav > ul > li:hover > ul > li:hover{
@@ -116,6 +118,7 @@ nav > ul > li:hover > ul > li:hover{
 }
 
 nav > ul > li:hover > ul > li:hover a{
+    display: block;
     color: white;
 }
 

@@ -7,37 +7,6 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"/>
     <h1 class="title">{{title}}</h1>
     
-     {% for article in articles %}
-    <article class="article-item">
-      {% if article.image != 'null' and article.image.url|length >= 1 %}
-        <div class="image">
-          <img src="{{ article.image.url }}" />
-        </div>
-      {% endif %}
-
-      <div class="data">
-        <h2>{{ article.title }}</h2>
-        <p>
-          {% for category in article.categories.all %}
-            <a href="#">{{ category }}</a>
-
-            {% if forloop.counter < article.categories.all|length %}   <!-- Esto sirve para se determine cuando es la ultima categoria y esta parte es de que mientras el contador de forloop.counter sea menor al total de categorias se muestra el "-" -->
-                {{'-'}}
-
-            {% endif %}
-
-          {% endfor %}
-        </p>
-        <span class="date">
-            {{ article.user.first_name }} {{ article.user.last_name }} |
-            {{ article.created_at }}</span>
-        <p>
-          {{ article.content|safe }}
-        </p>
-      </div>
-
-      <div class="clearfix"></div>
-    </article>
-  {% endfor %}
+   {% include 'articles/articles.html' %}
 
 {% endblock %}

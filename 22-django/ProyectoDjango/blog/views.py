@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from blog.models import Category, Article
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url="login")
 def list(request):
     articles = Article.objects.all()
 
@@ -18,6 +20,7 @@ def list(request):
         'articles': page_articles
     })
 
+@login_required(login_url="login")
 def category(request, category_id):
     category = get_object_or_404(Category, id=category_id)      #get_object_or_404 sirve para que si se escribe una categoria que no existe muestre un error 404
     #articles = Article.objects.filter(categories=category)
@@ -27,6 +30,7 @@ def category(request, category_id):
         #'articles' : articles
     }) 
 
+@login_required(login_url="login")
 def article(request, article_id):
 
     article = get_object_or_404(Article, id=article_id)

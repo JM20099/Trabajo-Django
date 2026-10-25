@@ -27,24 +27,35 @@
                 <li>
                     <a href="{% url 'index' %}">Inicio</a>
                 </li>
-                 <li>
-                    <a href="{% url 'list_articles' %}">Categorias</a>
-                    <ul>
-                        {% for category in categories %} 
-                            <li>
-                                <a href="{% url 'category' category.0 %}">{{category.1}}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </li>
-                {% for Page in pages %} 
-                <li>
-                 <a href="{% url 'page' Page.2 %}">{{Page.1}}</a>
-                </li>
-                {% endfor %}
-                <li>
-                    <a href="{% url 'register' %}">Registro</a>
-                </li>
+                {% if user.email %}
+
+                
+                    <li>
+                        <a href="{% url 'list_articles' %}">Categorias</a>
+                        <ul>
+                            {% for category in categories %} 
+                                <li>
+                                    <a href="{% url 'category' category.0 %}">{{category.1}}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% for Page in pages %} 
+                    <li>
+                    <a href="{% url 'page' Page.2 %}">{{Page.1}}</a>
+                    </li>
+                    {% endfor %}
+                    <li>
+                        <a href="{% url 'logout' %}">Cerrar Sesion</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{% url 'register' %}">Registro</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'login' %}">Login</a>
+                    </li>
+                {% endif %}
             </ul>
         </nav>
         <div id="content">

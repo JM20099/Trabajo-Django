@@ -8,6 +8,6 @@
     <h1 class="title">{{category.name}}</h1>
     <p>{{category.description}}<p>
     
-    {% include 'articles/articles.html' with articles=category.articles.all %}    #Mostrar los articulos que pertenecen a cada categoria junto con el related_name de categorias en la clase articles en models
+    {% include 'articles/articles.html' with articles=category.articles.all %}    <!--Mostrar los articulos que pertenecen a cada categoria junto con el related_name de categorias en la clase articles en models-->
 
 {% endblock %}

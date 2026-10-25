@@ -141,6 +141,25 @@ nav > ul > li:hover > ul > li:hover a{
     margin: 0 auto;
 }
 
+.box .image {
+    width: 45%;
+    float: left;
+    margin-right: 40px;
+}
+
+.box .image img {
+    width: 80%;
+}
+
+.box a {
+    transition: all 300ms;
+    color: #444;
+}
+
+.box a:hover {
+    color: #1f7e58;
+}
+
 .title{
     color: #444;
     letter-spacing: 1px;

@@ -4,4 +4,5 @@ from . import views
 urlpatterns = [
      path('', views.index, name="index"), # configuracion de ruta vacia vinculada al index
      path('inicio/', views.index, name="inicio"), # cuando encuentre la ruta inicio
+     path('registro/',views.register_page, name="register")
 ]
